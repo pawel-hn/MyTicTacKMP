@@ -9,8 +9,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 
-class MainViewModel
-    : ViewModel() {
+class MainViewModel : ViewModel() {
     private val _isSplashVisible = MutableStateFlow(true)
     val isSplashVisible: StateFlow<Boolean> = _isSplashVisible.asStateFlow()
 

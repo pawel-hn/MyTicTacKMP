@@ -8,14 +8,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import kotlinx.coroutines.delay
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.KoinContext
+import org.koin.compose.viewmodel.koinViewModel
 import org.mytictackmp.app.start.StartScreen
 import org.mytictackmp.app.ui.MyTicTacTheme
 
@@ -24,32 +22,29 @@ import org.mytictackmp.app.ui.MyTicTacTheme
 fun App() {
     Box(modifier = Modifier.fillMaxSize()) {
 
-        var splash by remember { mutableStateOf(true) }
-
-        LaunchedEffect(Unit) {
-            delay(1000)
-            splash = false
-        }
         MyTicTacTheme {
-            Crossfade(
-                modifier =
-                Modifier
-                    .fillMaxSize()
-                    .background(color = MyTicTacTheme.colours.backgroundScreen)
-                    .statusBarsPadding()
-                    .systemBarsPadding(),
-                targetState = splash,
-                animationSpec = tween(1000),
-                label = ""
-            ) { showSplash ->
-                if (showSplash) {
-                    SplashScreen()
-                } else {
-                    StartScreen()
+            KoinContext {
+                val viewModel: MainViewModel = koinViewModel()
+                val splash by viewModel.isSplashVisible.collectAsStateWithLifecycle()
+
+                Crossfade(
+                    modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .background(color = MyTicTacTheme.colours.backgroundScreen)
+                        .statusBarsPadding()
+                        .systemBarsPadding(),
+                    targetState = splash,
+                    animationSpec = tween(1000),
+                    label = ""
+                ) { showSplash ->
+                    if (showSplash) {
+                        SplashScreen()
+                    } else {
+                        StartScreen()
+                    }
                 }
             }
         }
     }
-
-
 }
