@@ -14,32 +14,22 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.mytictackmp.app.data.DifficultyLevel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.mytictackmp.app.ui.MyTicTacTheme
 import org.mytictackmp.app.ui.Padding
 import org.mytictackmp.app.ui.TicTacButton
 
 @Composable
 fun StartScreen(
+    viewModel: StartScreenViewModel,
 ) {
-
-
-    val state = remember {
-        StartScreenUIState(
-            singlePLayer = false,
-            startScreenFirstPlayerUI = StartScreenFirstPlayerUI.Circle,
-            difficultyLevel = DifficultyLevel.IMPOSSIBLE,
-            loadGameButtonEnabled = false
-        )
-    }
-
+    val state by viewModel.state.collectAsStateWithLifecycle()
 
     BoxWithConstraints(
         modifier =
@@ -77,7 +67,7 @@ fun StartScreen(
                         width = width * 0.4F,
                         isSelected = state.singlePLayer == (it == 0),
                         onClick = {
-
+                            viewModel.onPlayerCountChanged(it == 0)
                         },
                         enabledPrimaryColor = MyTicTacTheme.colours.interactiveSecondary,
                         enabledSecondaryColor = MyTicTacTheme.colours.interactiveSecondaryContent
@@ -91,8 +81,8 @@ fun StartScreen(
                 difficultyLevel = state.difficultyLevel,
                 singlePlayer = state.singlePLayer,
                 startScreenFirstPlayerUI = state.startScreenFirstPlayerUI,
-                onDifficultyChanged = {},
-                onPlayerChanged = {}
+                onDifficultyChanged = viewModel::onDifficultyChanged,
+                onPlayerChanged = viewModel::onFirstPlayerChanged
             )
         }
 
@@ -126,7 +116,7 @@ fun StartScreen(
                 width = width / 2F,
                 height = 50.dp,
                 text = "Load",
-                onClick = {},
+                onClick = viewModel::onLoadGameClick,
                 isSelected = true,
                 enabled = state.loadGameButtonEnabled,
                 enabledPrimaryColor = loadButtonColor,

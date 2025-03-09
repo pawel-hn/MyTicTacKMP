@@ -13,7 +13,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.KoinContext
 import org.koin.compose.viewmodel.koinViewModel
-import org.mytictackmp.app.start.StartScreen
+import org.mytictackmp.app.navigation.AppNavGraph
 import org.mytictackmp.app.ui.MyTicTacTheme
 
 @Composable
@@ -38,7 +38,7 @@ fun App() {
                     if (showSplash) {
                         SplashScreen()
                     } else {
-                        StartScreen()
+                        AppNavGraph()
                     }
                 }
             }
