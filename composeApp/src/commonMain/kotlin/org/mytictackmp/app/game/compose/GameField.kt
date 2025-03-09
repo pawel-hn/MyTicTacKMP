@@ -21,6 +21,8 @@ import org.mytictackmp.app.data.Field
 import org.mytictackmp.app.game.GameUIState
 import org.mytictackmp.app.ui.debouncedFieldClick
 
+const val STANDARD_ANIMATION_DURATION = 500
+
 @Composable
 fun GameField(
     modifier: Modifier,
@@ -51,7 +53,7 @@ fun GameField(
                 if (animationEvent.winningFields.isNotEmpty()) {
                     winningLineAnimation.animateTo(
                         20F,
-                        tween(500, 500)
+                        tween(STANDARD_ANIMATION_DURATION, STANDARD_ANIMATION_DURATION)
                     )
                 }
             }
@@ -143,7 +145,7 @@ fun CoroutineScope.animateFloatToOne(animatable: Animatable<Float, AnimationVect
             targetValue = 20f,
             animationSpec =
             tween(
-                durationMillis = 500
+                durationMillis = STANDARD_ANIMATION_DURATION
             )
         )
     }

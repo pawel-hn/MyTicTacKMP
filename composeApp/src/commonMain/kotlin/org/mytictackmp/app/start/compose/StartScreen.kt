@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,6 +22,8 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import org.mytictackmp.app.start.StartRouter
+import org.mytictackmp.app.start.StartScreenUIEvent
 import org.mytictackmp.app.start.StartScreenViewModel
 import org.mytictackmp.app.ui.MyTicTacTheme
 import org.mytictackmp.app.ui.Padding
@@ -29,8 +32,18 @@ import org.mytictackmp.app.ui.TicTacButton
 @Composable
 fun StartScreen(
     viewModel: StartScreenViewModel,
+    router: StartRouter,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+
+    LaunchedEffect(Unit) {
+        viewModel.startScreenEvent.collect {
+            when (it) {
+                StartScreenUIEvent.StartGame -> router.onStartGame()
+                StartScreenUIEvent.LoadGame -> router.onLoadGame()
+            }
+        }
+    }
 
     BoxWithConstraints(
         modifier =
@@ -97,7 +110,7 @@ fun StartScreen(
                 width = width / 2F,
                 height = 50.dp,
                 text = "Start",
-                onClick = {},
+                onClick = viewModel::onStartGameClick,
                 isSelected = true,
                 enabledPrimaryColor = MyTicTacTheme.colours.interactivePrimary,
                 enabledSecondaryColor = MyTicTacTheme.colours.interactivePrimaryContent

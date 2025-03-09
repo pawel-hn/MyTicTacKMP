@@ -19,7 +19,6 @@ object GameViewModelArguments {
     const val LOAD_GAME = "loadGame"
 }
 
-
 class GameViewModel(
     private val gameEngine: GameEngine,
     savedStateHandle: SavedStateHandle
