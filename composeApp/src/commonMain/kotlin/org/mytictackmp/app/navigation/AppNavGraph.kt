@@ -5,8 +5,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import org.koin.compose.viewmodel.koinViewModel
-import org.mytictackmp.app.start.StartScreen
 import org.mytictackmp.app.start.StartScreenViewModel
+import org.mytictackmp.app.start.compose.StartScreen
 
 
 enum class Screen {

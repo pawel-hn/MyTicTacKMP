@@ -1,7 +1,6 @@
 package org.mytictackmp.app.start
 
 import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.channels.Channel
@@ -20,6 +19,7 @@ import org.mytictackmp.app.gameoptions.GameOptionsService
 class StartScreenViewModel(
     private val gameOptionsService: GameOptionsService,
 ) : ViewModel(), DefaultLifecycleObserver {
+
     private val _startScreenEvent = Channel<StartScreenUIEvent>()
     val startScreenEvent: Flow<StartScreenUIEvent> = _startScreenEvent.receiveAsFlow()
     private val loadButtonEnabled = MutableStateFlow(false)

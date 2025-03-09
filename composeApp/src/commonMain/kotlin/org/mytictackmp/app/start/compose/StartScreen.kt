@@ -1,4 +1,4 @@
-package org.mytictackmp.app.start
+package org.mytictackmp.app.start.compose
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import org.mytictackmp.app.start.StartScreenViewModel
 import org.mytictackmp.app.ui.MyTicTacTheme
 import org.mytictackmp.app.ui.Padding
 import org.mytictackmp.app.ui.TicTacButton

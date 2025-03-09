@@ -1,4 +1,4 @@
-package org.mytictackmp.app.start
+package org.mytictackmp.app.start.compose
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.SizeTransform
@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.mytictackmp.app.data.DifficultyLevel
+import org.mytictackmp.app.start.StartScreenFirstPlayerUI
 import org.mytictackmp.app.ui.MyTicTacTheme
 import org.mytictackmp.app.ui.Padding
 import org.mytictackmp.app.ui.TicTacButton
