@@ -3,7 +3,6 @@ package org.mytictackmp.app
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.systemBarsPadding
@@ -20,9 +19,7 @@ import org.mytictackmp.app.ui.MyTicTacTheme
 @Composable
 @Preview
 fun App() {
-    Box(modifier = Modifier.fillMaxSize()) {
-
-        MyTicTacTheme {
+    MyTicTacTheme {
             KoinContext {
                 val viewModel: MainViewModel = koinViewModel()
                 val splash by viewModel.isSplashVisible.collectAsStateWithLifecycle()
@@ -46,5 +43,4 @@ fun App() {
                 }
             }
         }
-    }
 }
