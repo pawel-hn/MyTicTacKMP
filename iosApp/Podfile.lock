@@ -1,0 +1,16 @@
+PODS:
+  - MyCocoaPod (1.0)
+
+DEPENDENCIES:
+  - MyCocoaPod (from `../composeApp`)
+
+EXTERNAL SOURCES:
+  MyCocoaPod:
+    :path: "../composeApp"
+
+SPEC CHECKSUMS:
+  MyCocoaPod: 4706fbf951cfe4bbfccb9e0c3c7152f5ec280af2
+
+PODFILE CHECKSUM: ac2840bca860469da25cc8340209e6c9862790b2
+
+COCOAPODS: 1.16.2
