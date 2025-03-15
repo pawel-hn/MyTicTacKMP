@@ -24,6 +24,7 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "ComposeApp"
             isStatic = true
+            binaryOption("bundleId", "org.mytictackmp.app")
         }
     }
     
@@ -82,6 +83,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.runtime.android)
     debugImplementation(compose.uiTooling)
 }
 

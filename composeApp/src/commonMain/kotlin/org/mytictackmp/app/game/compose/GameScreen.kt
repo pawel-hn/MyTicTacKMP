@@ -33,6 +33,8 @@ import org.mytictackmp.app.game.GameViewModel
 import org.mytictackmp.app.ui.MyTicTacTheme
 import org.mytictackmp.app.ui.Padding
 import org.mytictackmp.app.ui.TicTacButton
+import org.mytictackmp.app.ui.components.TicTacBackHandler
+import org.mytictackmp.app.ui.components.TicTacDialog
 
 
 @Composable
@@ -76,7 +78,7 @@ fun GameScreen(viewModel: GameViewModel, router: GameRouter) {
         }
     }
 
-    BackHandler(onBack = viewModel::onBack)
+    TicTacBackHandler { viewModel.onGestureBack() }
 
     Column(
         modifier = Modifier.background(Color.White).fillMaxSize(),
@@ -146,6 +148,15 @@ fun GameScreen(viewModel: GameViewModel, router: GameRouter) {
     }
     val dialogToShow = gameDialog.value
     if (dialogToShow != null) {
-
+        TicTacDialog(
+            gameDialog = dialogToShow,
+            onConfirm = {
+                gameDialog.value = null
+                viewModel.dialogConfirmClick(dialogToShow)
+            },
+            onCancel = {
+                gameDialog.value = null
+            }
+        )
     }
 }
