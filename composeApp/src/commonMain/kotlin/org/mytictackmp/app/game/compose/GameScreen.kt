@@ -33,7 +33,6 @@ import org.mytictackmp.app.game.GameViewModel
 import org.mytictackmp.app.ui.MyTicTacTheme
 import org.mytictackmp.app.ui.Padding
 import org.mytictackmp.app.ui.TicTacButton
-import org.mytictackmp.app.ui.components.TicTacBackHandler
 import org.mytictackmp.app.ui.components.TicTacDialog
 
 
@@ -77,8 +76,6 @@ fun GameScreen(viewModel: GameViewModel, router: GameRouter) {
             }
         }
     }
-
-    TicTacBackHandler { viewModel.onGestureBack() }
 
     Column(
         modifier = Modifier.background(Color.White).fillMaxSize(),
