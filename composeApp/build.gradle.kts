@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinCocoapods)
+    alias(libs.plugins.kotlinSerialization)
 }
 
 kotlin {
@@ -69,6 +70,9 @@ kotlin {
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.koin.compose.viewmodel.nvigation)
             implementation(libs.kotlinxAtomicfu)
+            implementation(libs.kotlin.serialization.json)
+            api(libs.datastore.preferences)
+            api(libs.datastore)
         }
     }
 }

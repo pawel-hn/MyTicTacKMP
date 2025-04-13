@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
 import org.mytictackmp.app.data.GameEndResult
 import org.mytictackmp.app.gameengine.GameEngine
 import org.mytictackmp.app.gameengine.GameEvent
+import org.mytictackmp.app.utils.makeLog
 
 object GameViewModelArguments {
     const val LOAD_GAME = "loadGame"
@@ -65,9 +66,9 @@ class GameViewModel(
             }
         }
 
-//        if (loadGame) {
-//            viewModelScope.launch { gameEngine.loadGame() }
-//        }
+        if (loadGame) {
+            viewModelScope.launch { gameEngine.loadGame() }
+        }
     }
 
     fun onGestureBack() {
@@ -102,18 +103,22 @@ class GameViewModel(
         }
     }
 
-//    fun saveGame() {
-//        if (isGameRunning()) {
-//            viewModelScope.launch {
-//                val gameSaved = gameEngine.saveGame()
-//                if (gameSaved.isSuccess) {
-//                    _event.emit(GameUIEvents.ShowToast(GameToast.GameSaved))
-//                } else if (gameSaved.isFailure) {
-//                    _event.emit(GameUIEvents.ShowToast(GameToast.GameSaveFail))
-//                }
-//            }
-//        }
-//    }
+    fun saveGame() {
+        if (isGameRunning()) {
+            viewModelScope.launch {
+                val gameSaved = gameEngine.saveGame()
+                if (gameSaved.isSuccess) {
+                    _event.emit(GameUIEvents.ShowToast(GameToast.GameSaved))
+                } else if (gameSaved.isFailure) {
+                    _event.emit(GameUIEvents.ShowToast(GameToast.GameSaveFail))
+                }
+            }
+        }
+    }
+
+    fun gameSaved() {
+        makeLog("gameSaved")
+    }
 
     fun setDefault() {
         gameEngine.setDefault()

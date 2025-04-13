@@ -25,9 +25,12 @@ import org.mytictackmp.app.data.GameEndResult
 import org.mytictackmp.app.data.Participant
 import org.mytictackmp.app.data.Player
 import org.mytictackmp.app.data.PlayerState
+import org.mytictackmp.app.data.SaveGame
 import org.mytictackmp.app.data.center
 import org.mytictackmp.app.data.corners
 import org.mytictackmp.app.data.edges
+import org.mytictackmp.app.data.savegame.LoadGameUseCase
+import org.mytictackmp.app.data.savegame.SaveGameUseCase
 import org.mytictackmp.app.data.victories
 import org.mytictackmp.app.gameoptions.GameOptionsService
 
@@ -38,10 +41,17 @@ interface GameEngine {
     fun onFieldSelected(id: Int, computerMove: Boolean)
 
     fun setDefault()
+
+
+    suspend fun saveGame(): Result<Unit>
+
+    suspend fun loadGame()
 }
 
 class GameEngineImpl(
     gameOptionsService: GameOptionsService,
+    private val saveGameUseCase: SaveGameUseCase,
+    private val loadGameUseCase: LoadGameUseCase,
     private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Default)
 ) : GameEngine {
     private var options = gameOptionsService.gameOptions.value
@@ -115,6 +125,24 @@ class GameEngineImpl(
         }
     }
 
+    override suspend fun saveGame(): Result<Unit> {
+        return saveGameUseCase.invoke(
+            SaveGame(
+                currentGame = currentGame.value,
+                options = options
+            )
+        )
+    }
+
+    override suspend fun loadGame() {
+        loadGameUseCase.invoke().onSuccess {
+            options = it.options
+            val loadedMoves = it.currentGame.cross.moves + it.currentGame.circle.moves
+            tappedIds.addAll(loadedMoves.map { field -> field.id })
+            _gameEvent.emit(GameEvent.GameLoaded(loadedMoves))
+            currentGame.value = it.currentGame
+        }
+    }
 
     private fun makeMove(currentGame: CurrentGame, id: Int): CurrentGame {
         val tapsX = currentGame.cross.moves.toMutableSet()

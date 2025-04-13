@@ -1,6 +1,7 @@
 package org.mytictackmp.app.start
 
 import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.channels.Channel
@@ -14,10 +15,12 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import org.mytictackmp.app.data.DifficultyLevel
 import org.mytictackmp.app.data.FirstPLayer
+import org.mytictackmp.app.data.savegame.IsSavedGameUseCase
 import org.mytictackmp.app.gameoptions.GameOptionsService
 
 class StartScreenViewModel(
     private val gameOptionsService: GameOptionsService,
+    private val isSavedGameUseCase: IsSavedGameUseCase
 ) : ViewModel(), DefaultLifecycleObserver {
 
     private val _startScreenEvent = Channel<StartScreenUIEvent>()
@@ -46,7 +49,7 @@ class StartScreenViewModel(
         )
 
     init {
-        //  getSavedGame()
+        getSavedGame()
     }
 
     fun onPlayerCountChanged(isSinglePlayer: Boolean) = gameOptionsService.setSinglePlayer(
@@ -78,5 +81,14 @@ class StartScreenViewModel(
         }
     }
 
+    private fun getSavedGame() {
+        viewModelScope.launch {
+            loadButtonEnabled.value = isSavedGameUseCase.invoke()
+        }
+    }
 
+    override fun onResume(owner: LifecycleOwner) {
+        super.onResume(owner)
+        getSavedGame()
+    }
 }

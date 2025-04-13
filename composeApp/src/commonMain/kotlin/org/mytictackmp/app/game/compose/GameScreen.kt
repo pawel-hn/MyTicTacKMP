@@ -72,6 +72,7 @@ fun GameScreen(viewModel: GameViewModel, router: GameRouter) {
 
                 is GameUIEvents.ShowToast -> {
                     // Toast
+                    viewModel.gameSaved()
                 }
             }
         }
@@ -137,7 +138,7 @@ fun GameScreen(viewModel: GameViewModel, router: GameRouter) {
                         enabledSecondaryColor = MyTicTacTheme.colours.interactiveSecondaryContent,
                         text = "Save Game",
                         isSelected = true,
-                        onClick = {}
+                        onClick = viewModel::saveGame
                     )
                 }
             }

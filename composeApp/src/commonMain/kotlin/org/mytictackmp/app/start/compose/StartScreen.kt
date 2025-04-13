@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -21,6 +22,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.mytictackmp.app.start.StartRouter
 import org.mytictackmp.app.start.StartScreenUIEvent
@@ -33,8 +36,17 @@ import org.mytictackmp.app.ui.TicTacButton
 fun StartScreen(
     viewModel: StartScreenViewModel,
     router: StartRouter,
+    lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+
+    DisposableEffect(lifecycleOwner) {
+        lifecycleOwner.lifecycle.addObserver(viewModel)
+
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(viewModel)
+        }
+    }
 
     LaunchedEffect(Unit) {
         viewModel.startScreenEvent.collect {
