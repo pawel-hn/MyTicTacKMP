@@ -9,10 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Share
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -20,11 +17,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.backhandler.BackHandler
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import mytictackmp.composeapp.generated.resources.Res
+import mytictackmp.composeapp.generated.resources.reset
+import mytictackmp.composeapp.generated.resources.save
+import org.jetbrains.compose.resources.stringResource
 import org.mytictackmp.app.game.GameDialog
 import org.mytictackmp.app.game.GameRouter
 import org.mytictackmp.app.game.GameUIEvents
@@ -36,6 +39,7 @@ import org.mytictackmp.app.ui.TicTacButton
 import org.mytictackmp.app.ui.components.TicTacDialog
 
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun GameScreen(viewModel: GameViewModel, router: GameRouter) {
     val gameDialog = rememberSaveable { mutableStateOf<GameDialog?>(null) }
@@ -78,6 +82,10 @@ fun GameScreen(viewModel: GameViewModel, router: GameRouter) {
         }
     }
 
+    BackHandler(true) {
+        viewModel.onGestureBack()
+    }
+
     Column(
         modifier = Modifier.background(Color.White).fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -110,11 +118,11 @@ fun GameScreen(viewModel: GameViewModel, router: GameRouter) {
                     onClick = viewModel::onShareClick,
                     modifier = Modifier.padding(Padding.medium)
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.Share,
-                        contentDescription = null,
-                        tint = MyTicTacTheme.colours.interactiveTertiaryContent
-                    )
+//                    Icon(
+//                        imageVector = Icons.Default.Share,
+//                        contentDescription = null,
+//                        tint = MyTicTacTheme.colours.interactiveTertiaryContent
+//                    )
                 }
                 Row(
                     modifier = Modifier.fillMaxWidth().padding(vertical = Padding.large),
@@ -126,7 +134,7 @@ fun GameScreen(viewModel: GameViewModel, router: GameRouter) {
                         textSize = 12.sp,
                         enabledPrimaryColor = MyTicTacTheme.colours.interactiveTertiary,
                         enabledSecondaryColor = MyTicTacTheme.colours.interactiveTertiaryContent,
-                        text = "Reset",
+                        text = stringResource(Res.string.reset),
                         isSelected = true,
                         onClick = viewModel::reset
                     )
@@ -136,7 +144,7 @@ fun GameScreen(viewModel: GameViewModel, router: GameRouter) {
                         textSize = 12.sp,
                         enabledPrimaryColor = MyTicTacTheme.colours.interactiveSecondary,
                         enabledSecondaryColor = MyTicTacTheme.colours.interactiveSecondaryContent,
-                        text = "Save Game",
+                        text = stringResource(Res.string.save),
                         isSelected = true,
                         onClick = viewModel::saveGame
                     )

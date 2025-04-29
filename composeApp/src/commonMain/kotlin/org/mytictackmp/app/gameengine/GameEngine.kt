@@ -205,7 +205,7 @@ class GameEngineImpl(
                 // blocking move
                 findWinningMove(human.moves, availableFields)?.let { return it }
 
-                if (lvl == DifficultyLevel.IMPOSSIBLE) {
+                if (lvl == DifficultyLevel.HARD) {
                     if (human.moves.size == 2 &&
                         human.moves.first() in edges &&
                         human.moves.last() in corners

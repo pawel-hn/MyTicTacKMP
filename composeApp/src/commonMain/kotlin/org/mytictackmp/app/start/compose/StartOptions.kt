@@ -15,6 +15,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import mytictackmp.composeapp.generated.resources.Res
+import mytictackmp.composeapp.generated.resources.difficulty
+import org.jetbrains.compose.resources.stringResource
 import org.mytictackmp.app.data.DifficultyLevel
 import org.mytictackmp.app.start.StartScreenFirstPlayerUI
 import org.mytictackmp.app.ui.MyTicTacTheme
@@ -53,10 +56,10 @@ fun StartOptions(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(Padding.small)
             ) {
-                Text(text = "Poziom trudności:")
+                Text(text = stringResource(Res.string.difficulty))
                 DifficultyLevel.entries.forEach { level ->
                     TicTacButton(
-                        text = level.name,
+                        text = stringResource(level.textId),
                         width = maxWidth / 3F,
                         textSize = 12.sp,
                         height = 40.dp,

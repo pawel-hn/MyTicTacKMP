@@ -25,6 +25,14 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import mytictackmp.composeapp.generated.resources.Res
+import mytictackmp.composeapp.generated.resources.load
+import mytictackmp.composeapp.generated.resources.no_of_player
+import mytictackmp.composeapp.generated.resources.one_player
+import mytictackmp.composeapp.generated.resources.start
+import mytictackmp.composeapp.generated.resources.tic_tac_toe
+import mytictackmp.composeapp.generated.resources.two_players
+import org.jetbrains.compose.resources.stringResource
 import org.mytictackmp.app.start.StartRouter
 import org.mytictackmp.app.start.StartScreenUIEvent
 import org.mytictackmp.app.start.StartScreenViewModel
@@ -69,7 +77,7 @@ fun StartScreen(
 
         Text(
             modifier = Modifier.align(Alignment.TopCenter),
-            text = "T I C T A C T O E",
+            text = stringResource(Res.string.tic_tac_toe),
             fontSize = 24.sp,
             color = MyTicTacTheme.colours.contentPrimary
         )
@@ -78,7 +86,10 @@ fun StartScreen(
             modifier = Modifier.offset { IntOffset(x = 0, y = (height.toPx() / 4).toInt()) },
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "Liczba graczy:", color = MyTicTacTheme.colours.contentPrimary)
+            Text(
+                text = stringResource(Res.string.no_of_player),
+                color = MyTicTacTheme.colours.contentPrimary
+            )
             Row(
                 modifier =
                 Modifier
@@ -89,7 +100,9 @@ fun StartScreen(
                 repeat(2) {
                     TicTacButton(
                         modifier = Modifier.weight(0.5F),
-                        text = if (it == 0) "1 gracz" else "2 graczy",
+                        text = stringResource(
+                            if (it == 0) Res.string.one_player else Res.string.two_players
+                        ),
                         width = width * 0.4F,
                         isSelected = state.singlePLayer == (it == 0),
                         onClick = {
@@ -121,7 +134,7 @@ fun StartScreen(
             TicTacButton(
                 width = width / 2F,
                 height = 50.dp,
-                text = "Start",
+                text = stringResource(Res.string.start),
                 onClick = viewModel::onStartGameClick,
                 isSelected = true,
                 enabledPrimaryColor = MyTicTacTheme.colours.interactivePrimary,
@@ -141,7 +154,7 @@ fun StartScreen(
             TicTacButton(
                 width = width / 2F,
                 height = 50.dp,
-                text = "Load",
+                text = stringResource(Res.string.load),
                 onClick = viewModel::onLoadGameClick,
                 isSelected = true,
                 enabled = state.loadGameButtonEnabled,

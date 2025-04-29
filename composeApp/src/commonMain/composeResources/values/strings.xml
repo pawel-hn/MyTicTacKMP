@@ -1,0 +1,16 @@
+<resources>
+    <string name="tic_tac_toe">T I C T A C T O E</string>
+    <string name="start_game">Start game</string>
+    <string name="load_game">Load game</string>
+    <string name="one_player">One player</string>
+    <string name="two_players">Two players</string>
+    <string name="no_of_player">How many players:</string>
+    <string name="difficulty">Difficulty level:</string>
+    <string name="difficulty_easy">Easy</string>
+    <string name="difficulty_medium">Medium</string>
+    <string name="difficulty_hard">Hard</string>
+    <string name="start">Start</string>
+    <string name="save">Save game</string>
+    <string name="load">Load</string>
+    <string name="reset">Reset</string>
+</resources>
