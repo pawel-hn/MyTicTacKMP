@@ -71,7 +71,6 @@ kotlin {
             implementation(libs.koin.compose.viewmodel.nvigation)
             implementation(libs.kotlinxAtomicfu)
             implementation(libs.kotlin.serialization.json)
-            implementation(libs.compose.backhndler)
             api(libs.datastore.preferences)
             api(libs.datastore)
         }
