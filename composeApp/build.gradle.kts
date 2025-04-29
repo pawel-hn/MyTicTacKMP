@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 
@@ -21,7 +22,8 @@ kotlin {
         framework {
             baseName = "MyFramework"
             binaryOption("bundleId", "org.mytictackmp.app")
-            isStatic = false
+            isStatic = true
+            @OptIn(ExperimentalKotlinGradlePluginApi::class)
             transitiveExport = false
         }
 
