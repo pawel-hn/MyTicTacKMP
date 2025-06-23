@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -17,15 +18,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import mytictackmp.composeapp.generated.resources.Res
+import mytictackmp.composeapp.generated.resources.ic_share
 import mytictackmp.composeapp.generated.resources.reset
 import mytictackmp.composeapp.generated.resources.save
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.mytictackmp.app.game.GameDialog
 import org.mytictackmp.app.game.GameRouter
@@ -34,11 +36,10 @@ import org.mytictackmp.app.game.GameUIState
 import org.mytictackmp.app.game.GameViewModel
 import org.mytictackmp.app.ui.MyTicTacTheme
 import org.mytictackmp.app.ui.Padding
-import org.mytictackmp.app.ui.TicTacButton
+import org.mytictackmp.app.ui.components.TicTacButton
 import org.mytictackmp.app.ui.components.TicTacDialog
+import org.mytictackmp.app.ui.screenshoot.ScreenShootScreen
 
-
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun GameScreen(viewModel: GameViewModel, router: GameRouter) {
     val gameDialog = rememberSaveable { mutableStateOf<GameDialog?>(null) }
@@ -99,26 +100,33 @@ fun GameScreen(viewModel: GameViewModel, router: GameRouter) {
                     state = result
                 )
 
-                GameField(
-                    modifier = Modifier
-                        .weight(1F)
-                        .background(color = MyTicTacTheme.colours.backgroundScreen),
-                    state = result,
-                    animationEvent = animationEvent.value,
-                    onTap = { id -> viewModel.fieldTapped(id, false) },
-                    setDefault = viewModel::setDefault
-                )
+                ScreenShootScreen(
+                    modifier = Modifier.weight(1F),
+                    controller = viewModel.screenShotViewController
+                ) {
+                    GameField(
+                        modifier = Modifier
+                            .background(color = MyTicTacTheme.colours.backgroundScreen),
+                        state = result,
+                        animationEvent = animationEvent.value,
+                        onTap = { id -> viewModel.fieldTapped(id, false) },
+                        setDefault = viewModel::setDefault
+                    )
+                }
+
+
+
 
 
                 IconButton(
                     onClick = viewModel::onShareClick,
                     modifier = Modifier.padding(Padding.medium)
                 ) {
-//                    Icon(
-//                        imageVector = Icons.Default.Share,
-//                        contentDescription = null,
-//                        tint = MyTicTacTheme.colours.interactiveTertiaryContent
-//                    )
+                    Icon(
+                        painter = painterResource(Res.drawable.ic_share),
+                        contentDescription = null,
+                        tint = MyTicTacTheme.colours.interactiveTertiaryContent
+                    )
                 }
                 Row(
                     modifier = Modifier.fillMaxWidth().padding(vertical = Padding.large),

@@ -11,6 +11,8 @@
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
+		83DFCCF42DCA8C9D008FCF1F /* ShareService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DFCCF32DCA8C92008FCF1F /* ShareService.swift */; };
+		83DFCCF62DCA8D39008FCF1F /* LiveShareServiceBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DFCCF52DCA8D37008FCF1F /* LiveShareServiceBridge.swift */; };
 		A02301C8636FE47A42D7B413 /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD254EA779E9D6A16B3E29D /* Pods_iosApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +25,8 @@
 		7555FF7B242A565900829871 /* MyTicTacKMP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTicTacKMP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		83DFCCF32DCA8C92008FCF1F /* ShareService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareService.swift; sourceTree = "<group>"; };
+		83DFCCF52DCA8D37008FCF1F /* LiveShareServiceBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveShareServiceBridge.swift; sourceTree = "<group>"; };
 		A562766DA77BA4CACCC2CC33 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 		AB3632DC29227652001CCB65 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -69,6 +73,8 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				83DFCCF32DCA8C92008FCF1F /* ShareService.swift */,
+				83DFCCF52DCA8D37008FCF1F /* LiveShareServiceBridge.swift */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				7555FF82242A565900829871 /* ContentView.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
@@ -100,7 +106,6 @@
 				A562766DA77BA4CACCC2CC33 /* Pods-iosApp.debug.xcconfig */,
 				28F743813951C5584A1ABD09 /* Pods-iosApp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -238,8 +243,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83DFCCF62DCA8D39008FCF1F /* LiveShareServiceBridge.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				83DFCCF42DCA8C9D008FCF1F /* ShareService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

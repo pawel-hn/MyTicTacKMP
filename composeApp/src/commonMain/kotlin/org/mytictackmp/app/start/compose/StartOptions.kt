@@ -22,7 +22,7 @@ import org.mytictackmp.app.data.DifficultyLevel
 import org.mytictackmp.app.start.StartScreenFirstPlayerUI
 import org.mytictackmp.app.ui.MyTicTacTheme
 import org.mytictackmp.app.ui.Padding
-import org.mytictackmp.app.ui.TicTacButton
+import org.mytictackmp.app.ui.components.TicTacButton
 
 @Composable
 fun StartOptions(

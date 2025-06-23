@@ -1,4 +1,4 @@
-package org.mytictackmp.app.ui
+package org.mytictackmp.app.ui.components
 
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.tween
@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.mytictackmp.app.ui.MyTicTacTheme
 
 
 const val BUTTON_TRANSITION = 700

@@ -14,7 +14,11 @@ import kotlinx.coroutines.launch
 import org.mytictackmp.app.data.GameEndResult
 import org.mytictackmp.app.gameengine.GameEngine
 import org.mytictackmp.app.gameengine.GameEvent
+import org.mytictackmp.app.ui.screenshoot.ScreenShotViewController
+import org.mytictackmp.app.ui.screenshoot.createScreenShotViewController
 import org.mytictackmp.app.utils.makeLog
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
 object GameViewModelArguments {
     const val LOAD_GAME = "loadGame"
@@ -26,6 +30,7 @@ class GameViewModel(
 ) : ViewModel() {
 
     private val loadGame: Boolean = savedStateHandle[GameViewModelArguments.LOAD_GAME] ?: false
+    val screenShotViewController: ScreenShotViewController = createScreenShotViewController()
 
     private val _state = MutableStateFlow<GameUIState>(GameUIState.Loading)
     val state: StateFlow<GameUIState> = _state.asStateFlow()
@@ -124,8 +129,18 @@ class GameViewModel(
         gameEngine.setDefault()
     }
 
+    @OptIn(ExperimentalTime::class)
     fun onShareClick() {
+        makeLog("onShareClick")
+        viewModelScope.launch {
+            val result =
+                screenShotViewController
+                    .takeAndShareScreenShot(
+                        "screen_${Clock.System.now().epochSeconds}"
+                    )
 
+            makeLog("onShareClick: $result")
+        }
     }
 
     private fun isGameRunning() = gameEngine.state.value.isGameRunning
